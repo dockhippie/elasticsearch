@@ -1,0 +1,39 @@
+cluster:
+  name: ${ELASTICSEARCH_CLUSTER_NAME}
+
+node:
+  name: ${ELASTICSEARCH_NODE_NAME}
+  master: ${ELASTICSEARCH_NODE_MASTER}
+  data: ${ELASTICSEARCH_NODE_DATA}
+  ingest: ${ELASTICSEARCH_NODE_INGEST}
+  max_local_storage_nodes: ${ELASTICSEARCH_MAX_LOCAL_STORAGE_NODES}
+
+network:
+  host: ${ELASTICSEARCH_NETWORK_HOST}
+
+path:
+  data: ${ELASTICSEARCH_DATA_DIR}
+  logs: ${ELASTICSEARCH_LOGS_DIR}
+
+bootstrap:
+  memory_lock: ${ELASTICSEARCH_BOOTSTRAP_MEMORY_LOCK}
+
+discovery:
+  zen:
+    minimum_master_nodes: ${ELASTICSEARCH_DISCOVERY_MINIMUM_MASTERS}
+    ping:
+      unicast:
+        hosts: ${ELASTICSEARCH_DISCOVERY_UNICAST_HOSTS}
+
+gateway:
+  recover_after_nodes: ${ELASTICSEARCH_GATEWAY_RECOVER_AFTER_NODES}
+
+action:
+  destructive_requires_name: ${ELASTICSEARCH_ACTION_DESTRUCTIVE_REQUIRES_NAME}
+
+http:
+  enabled: ${ELASTICSEARCH_HTTP_ENABLED}
+  compression: ${ELASTICSEARCH_HTTP_COMPRESSION}
+  cors:
+    enabled: ${ELASTICSEARCH_HTTP_CORS_ENABLED}
+    allow-origin: ${ELASTICSEARCH_HTTP_CORS_ALLOW_ORIGIN}
