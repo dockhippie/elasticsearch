@@ -39,9 +39,12 @@ RUN apk update && \
 RUN mkdir -p \
     /usr/share/elasticsearch && \
   curl -sLo - \
-    ${ELASTICSEARCH_TARBALL} | tar xvzf - --strip 1 --exclude config --exclude logs --exclude plugins --exclude LICENSE.txt --exclude NOTICE.txt --exclude README.textile --exclude bin/*.bat --exclude bin/*.exe --exclude bin/x-pack* --exclude modules/x-pack* -C /usr/share/elasticsearch && \
+    ${ELASTICSEARCH_TARBALL} | tar xvzf - --strip 1 --exclude config --exclude logs --exclude plugins --exclude LICENSE.txt --exclude NOTICE.txt --exclude README.textile --exclude bin/*.bat --exclude bin/*.exe --exclude modules/x-pack-ml -C /usr/share/elasticsearch && \
   ln -sf \
     /usr/share/elasticsearch/bin/elasticsearch* \
+    /usr/bin/ && \
+  ln -sf \
+    /usr/share/elasticsearch/bin/xpack* \
     /usr/bin/ && \
   chown elastico:elastico \
     /usr/share/elasticsearch
