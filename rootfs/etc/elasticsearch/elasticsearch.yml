@@ -10,6 +10,7 @@ node:
 
 network:
   host: ${ELASTICSEARCH_NETWORK_HOST}
+  publish_host:  ${ELASTICSEARCH_NETWORK_PUBLISH_HOST}
 
 path:
   data: ${ELASTICSEARCH_DATA_DIR}
