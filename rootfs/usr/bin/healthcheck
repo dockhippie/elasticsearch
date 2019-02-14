@@ -1,9 +1,9 @@
 #!/bin/bash
-set -eo pipefail
+source /usr/bin/entrypoint
 
-CHECK="$(curl -s -o /dev/null -w "%{http_code}" http://localhost:9200)"
+CHECK="$(curl -s -o /dev/null -w "%{http_code}" ${ELASTICSEARCH_HEALTHCHECK_URL})"
 
-if [[ "${CHECK}" == "200" ]]
+if [[ "${CHECK}" == "${ELASTICSEARCH_HEALTHCHECK_CODE}" ]]
 then
   exit 0
 fi
