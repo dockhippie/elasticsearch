@@ -38,3 +38,7 @@ http:
   cors:
     enabled: ${ELASTICSEARCH_HTTP_CORS_ENABLED}
     allow-origin: ${ELASTICSEARCH_HTTP_CORS_ALLOW_ORIGIN}
+
+xpack:
+  security:
+    enabled: ${ELASTICSEARCH_XPACK_SECURITY_ENABLED}
