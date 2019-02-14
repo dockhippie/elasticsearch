@@ -46,6 +46,9 @@ RUN mkdir -p \
   ln -sf \
     /usr/share/elasticsearch/bin/xpack* \
     /usr/bin/ && \
+  ln -sf \
+    /var/lib/elasticsearch/plugins \
+    /usr/share/elasticsearch/plugins && \
   chown elastico:elastico \
     /usr/share/elasticsearch
 
