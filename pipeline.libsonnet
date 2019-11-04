@@ -103,7 +103,7 @@ local agent(arch='amd64') =
           image: 'plugins/webhook:1',
           pull: 'always',
           settings: {
-            url: { from_secret: 'microbadger_url' },
+            urls: { from_secret: 'microbadger_url' },
           },
         },
       ],
