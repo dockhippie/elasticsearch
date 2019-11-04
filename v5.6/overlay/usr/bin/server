@@ -1,0 +1,5 @@
+#!/bin/bash
+set -eo pipefail
+
+rm -f /etc/s6/server/down
+exec s6-svscan /etc/s6
