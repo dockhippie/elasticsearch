@@ -13,6 +13,10 @@ def main(ctx):
         'tag': 'latest',
       },
       {
+        'path': 'v7.10',
+        'tag': '7.10',
+      },
+      {
         'path': 'v6.4',
         'tag': '6.4',
       },

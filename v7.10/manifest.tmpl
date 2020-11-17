@@ -1,0 +1,13 @@
+image: webhippie/elasticsearch:7.10
+manifests:
+  -
+    image: webhippie/elasticsearch:7.10-amd64
+    platform:
+      architecture: amd64
+      os: linux
+  -
+    image: webhippie/elasticsearch:7.10-arm64v8
+    platform:
+      architecture: arm64
+      os: linux
+      variant: v8
