@@ -1,0 +1,42 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+        "github>webhippie/renovate:docker",
+        "docker:pinDigests",
+        "default:automergeDigest"
+    ],
+    "ignorePaths": [
+        "archive/"
+    ],
+    "packageRules": [
+        {
+            "description": "Update tags without merge",
+            "datasources": [
+                "github-releases"
+            ],
+            "updateTypes": [
+                "major",
+                "minor"
+            ],
+            "enabled": false,
+            "automerge": false,
+            "matchPackageNames": [
+                "elastic/elasticsearch"
+            ]
+        },
+        {
+            "description": "Update tags without merge",
+            "datasources": [
+                "github-releases"
+            ],
+            "updateTypes": [
+                "patch"
+            ],
+            "enabled": true,
+            "automerge": true,
+            "matchPackageNames": [
+                "elastic/elasticsearch"
+            ]
+        }
+    ]
+}

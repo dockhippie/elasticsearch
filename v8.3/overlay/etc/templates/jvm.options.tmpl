@@ -1,0 +1,10 @@
+-XX:+UseG1GC
+
+-Djava.io.tmpdir=/tmp
+
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:+ExitOnOutOfMemoryError
+-XX:HeapDumpPath=data
+-XX:ErrorFile={{ getenv "ELASTICSEARCH_LOGS_DIR" }}/hs_err_pid%p.log
+
+-Xlog:gc*,gc+age=trace,safepoint:file={{ getenv "ELASTICSEARCH_LOGS_DIR" }}/gc.log:utctime,pid,tags:filecount=32,filesize=64m

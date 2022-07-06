@@ -1,88 +1,92 @@
-# Elasticsearch
+# elasticsearch
 
-[![Build Status](https://cloud.drone.io/api/badges/dockhippie/elasticsearch/status.svg)](https://cloud.drone.io/dockhippie/elasticsearch)
-[![](https://images.microbadger.com/badges/image/webhippie/elasticsearch.svg)](https://microbadger.com/images/webhippie/elasticsearch "Get your own image badge on microbadger.com")
+[![Docker Build](https://github.com/dockhippie/elasticsearch/actions/workflows/docker.yml/badge.svg)](https://github.com/dockhippie/elasticsearch/actions/workflows/docker.yml) [![GitHub Repo](https://img.shields.io/badge/github-repo-yellowgreen)](https://github.com/dockhippie/elasticsearch)
 
-These are docker images for [Elasticsearch](https://www.elastic.co/products/elasticsearch) running on an [Alpine Linux container](https://registry.hub.docker.com/u/webhippie/alpine/).
-
+These are docker images for [Elasticsearch][upstream] running on our
+[Alpine Linux image][parent].
 
 ## Versions
 
-* [latest](./latest) available as `webhippie/elasticsearch:latest`
-* [6.4](./v6.4) available as `webhippie/elasticsearch:6.4`
-* [5.6](./v5.6) available as `webhippie/elasticsearch:5.6`
-
+For the available versions please look at [Docker Hub][dockerhub] or
+[Quay][quayio] or check the existing folders within the
+[GitHub repository][github].
 
 ## Volumes
 
-* /var/lib/elasticsearch
-
+*  /var/lib/elasticsearch
 
 ## Ports
 
-* 9200
-* 9300
-
+*  9200
+*  9300
 
 ## Available environment variables
 
-```bash
+```console
 ELASTICSEARCH_ACTION_DESTRUCTIVE_REQUIRES_NAME = false
 ELASTICSEARCH_BASE_DIR = /var/lib/elasticsearch
 ELASTICSEARCH_BOOTSTRAP_MEMORY_LOCK = false
+ELASTICSEARCH_CLUSTER_INITIAL_MASTER_NODES = # >= v7.17
 ELASTICSEARCH_CLUSTER_NAME = elasticsearch
 ELASTICSEARCH_CONFIG_DIR = /etc/elasticsearch
 ELASTICSEARCH_DATA_DIR = ${ELASTICSEARCH_BASE_DIR}/data
-ELASTICSEARCH_DISCOVERY_MINIMUM_MASTERS = 1
-ELASTICSEARCH_DISCOVERY_UNICAST_HOSTS =
-ELASTICSEARCH_GATEWAY_RECOVER_AFTER_NODES = 1
+ELASTICSEARCH_DELETE_GC_LOGS_ON_START = true
+ELASTICSEARCH_DISCOVERY_MINIMUM_MASTERS = 1 # <= v6.8
+ELASTICSEARCH_DISCOVERY_SEED_HOSTS = # >= v7.17
+ELASTICSEARCH_DISCOVERY_UNICAST_HOSTS = # <= v6.8
+ELASTICSEARCH_HEALTHCHECK_CODE = 200
+ELASTICSEARCH_HEALTHCHECK_URL = http://localhost:9200/
 ELASTICSEARCH_HTTP_COMPRESSION = true
 ELASTICSEARCH_HTTP_CORS_ALLOW_ORIGIN =
 ELASTICSEARCH_HTTP_CORS_ENABLED = false
-ELASTICSEARCH_HTTP_ENABLED = true
+ELASTICSEARCH_HTTP_ENABLED = true # <= v5.6
 ELASTICSEARCH_INITIAL_HEAP = 256m
+ELASTICSEARCH_JAVA_OPTIONS =
 ELASTICSEARCH_LOGS_DIR = ${ELASTICSEARCH_BASE_DIR}/logs
-ELASTICSEARCH_MAXIMUM_HEAP = 256m
 ELASTICSEARCH_MAX_FD = 65536
-ELASTICSEARCH_MAX_LOCAL_STORAGE_NODES = 1
 ELASTICSEARCH_MAX_MAP_COUNT =
+ELASTICSEARCH_MAXIMUM_HEAP = 256m
 ELASTICSEARCH_NETWORK_HOST = 0.0.0.0
 ELASTICSEARCH_NETWORK_PUBLISH_HOST =
-ELASTICSEARCH_NODE_DATA = true
-ELASTICSEARCH_NODE_INGEST = true
-ELASTICSEARCH_NODE_MASTER = true
+ELASTICSEARCH_NODE_DATA = true # <= v6.8
+ELASTICSEARCH_NODE_INGEST = true # <= v6.8
+ELASTICSEARCH_NODE_MASTER = true # <= v6.8
 ELASTICSEARCH_NODE_NAME = ${HOSTNAME}
+ELASTICSEARCH_NODE_ROLES = master,data,ingest # >= v7.17
 ELASTICSEARCH_PLUGINS_DIR = ${ELASTICSEARCH_BASE_DIR}/plugins
-ELASTICSEARCH_PLUGINS_INSTALL =
-ELASTICSEARCH_PLUGINS_UNINSTALL =
 ELASTICSEARCH_SCRIPTS_DIR = ${ELASTICSEARCH_BASE_DIR}/scripts
+ELASTICSEARCH_SKIP_CHOWN = false
+ELASTICSEARCH_SKIP_TEMPLATES = ${ELASTICSEARCH_BASE_DIR}/work
+ELASTICSEARCH_SKIP_TEMPLATES = false
 ELASTICSEARCH_STACK_SIZE = 1m
 ELASTICSEARCH_WORK_DIR = ${ELASTICSEARCH_BASE_DIR}/work
+ELASTICSEARCH_XPACK_SECURITY_ENABLED = true
 ```
-
 
 ## Inherited environment variables
 
-* [webhippie/alpine](https://github.com/dockhippie/alpine#available-environment-variables)
-
+*  [webhippie/alpine](https://github.com/dockhippie/alpine#available-environment-variables)
 
 ## Contributing
 
 Fork -> Patch -> Push -> Pull Request
 
-
 ## Authors
 
-* [Thomas Boerger](https://github.com/tboerger)
-
+*  [Thomas Boerger](https://github.com/tboerger)
 
 ## License
 
 MIT
 
-
 ## Copyright
 
-```
+```console
 Copyright (c) 2018 Thomas Boerger <http://www.webhippie.de>
 ```
+
+[upstream]: https://www.elastic.co/elasticsearch
+[parent]: https://github.com/dockhippie/alpine
+[dockerhub]: https://hub.docker.com/r/webhippie/elasticsearch/tags
+[quayio]: https://quay.io/repository/webhippie/elasticsearch?tab=tags
+[github]: https://github.com/dockhippie/elasticsearch
