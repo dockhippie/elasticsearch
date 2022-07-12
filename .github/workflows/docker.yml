@@ -19,11 +19,11 @@ jobs:
           - folder: v8.3
             tag: 8.3
             arm64: true
-            arm: true
+            arm: false
           - folder: v7.17
             tag: 7.17
             arm64: true
-            arm: true
+            arm: false
           - folder: v6.8
             tag: 6.8
             arm64: true
@@ -39,7 +39,7 @@ jobs:
           - folder: latest
             tag: latest
             arm64: true
-            arm: true
+            arm: false
 
     steps:
       - name: Checkout source
