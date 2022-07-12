@@ -1,4 +1,4 @@
-FROM webhippie/alpine:latest-arm64
+FROM webhippie/alpine:latest-arm64@sha256:c68c53afbd4d681569437fd83475f9e5e84350bada9ea53cc01bfb0798d41ba8
 
 EXPOSE 9200 9300
 
