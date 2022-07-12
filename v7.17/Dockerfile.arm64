@@ -1,0 +1,27 @@
+FROM webhippie/alpine:latest-arm64
+
+EXPOSE 9200 9300
+
+VOLUME ["/var/lib/elasticsearch", "/etc/elasticsearch/jvm.options.d"]
+WORKDIR /var/lib/elasticsearch
+CMD ["/usr/bin/container"]
+
+# renovate: datasource=github-releases depName=elastic/elasticsearch
+ENV ELASTICSEARCH_VERSION=7.17.5
+
+RUN apk update && \
+  apk upgrade && \
+  mkdir -p /var/lib/elasticsearch && \
+  groupadd -g 1000 elastico && \
+  useradd -u 1000 -d /var/lib/elasticsearch -g elastico -s /bin/bash -M elastico && \
+  apk add coreutils java-jna-native openjdk17-jre && \
+  rm -rf /var/cache/apk/*
+
+RUN mkdir -p /usr/share/elasticsearch && \
+  curl -sLo - https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-${ELASTICSEARCH_VERSION}-linux-aarch64.tar.gz | tar xvzf - --strip 1 --exclude jdk --exclude config --exclude logs --exclude plugins --exclude LICENSE.txt --exclude NOTICE.txt --exclude README.asciidoc --exclude bin/*.bat --exclude bin/*.exe --exclude modules/x-pack-ml -C /usr/share/elasticsearch && \
+  ln -sf /usr/share/elasticsearch/bin/elasticsearch* /usr/bin/ && \
+  ln -sf /usr/share/elasticsearch/bin/xpack* /usr/bin/ && \
+  ln -sf /var/lib/elasticsearch/plugins /usr/share/elasticsearch/plugins && \
+  chown elastico:elastico /usr/share/elasticsearch
+
+COPY ./overlay /

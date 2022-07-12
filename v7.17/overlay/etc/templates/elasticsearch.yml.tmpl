@@ -1,0 +1,42 @@
+cluster:
+  name: {{ getenv "ELASTICSEARCH_CLUSTER_NAME" }}
+{{ if ne (getenv "ELASTICSEARCH_CLUSTER_INITIAL_MASTER_NODES") "" }}
+  initial_master_nodes: ['{{ $vals := split (getenv "ELASTICSEARCH_CLUSTER_INITIAL_MASTER_NODES") "," }}{{ join $vals "', '" }}']
+{{ end }}
+
+node:
+  name: {{ getenv "ELASTICSEARCH_NODE_NAME" }}
+  roles: ['{{ $vals := split (getenv "ELASTICSEARCH_NODE_ROLES") "," }}{{ join $vals "', '" }}']
+
+path:
+  data: {{ getenv "ELASTICSEARCH_DATA_DIR" }}
+  logs: {{ getenv "ELASTICSEARCH_LOGS_DIR" }}
+
+network:
+  host: {{ getenv "ELASTICSEARCH_NETWORK_HOST" }}
+{{ if ne (getenv "ELASTICSEARCH_NETWORK_PUBLISH_HOST") "" }}
+  publish_host: {{ getenv "ELASTICSEARCH_NETWORK_PUBLISH_HOST" }}
+{{ end }}
+
+http:
+  compression: {{ getenv "ELASTICSEARCH_HTTP_COMPRESSION" }}
+  cors:
+    enabled: {{ getenv "ELASTICSEARCH_HTTP_CORS_ENABLED" }}
+{{ if ne (getenv "ELASTICSEARCH_HTTP_CORS_ALLOW_ORIGIN") "" }}
+    allow-origin: {{ getenv "ELASTICSEARCH_HTTP_CORS_ALLOW_ORIGIN" }}
+{{ end }}
+
+bootstrap:
+  memory_lock: {{ getenv "ELASTICSEARCH_BOOTSTRAP_MEMORY_LOCK" }}
+{{ if ne (getenv "ELASTICSEARCH_DISCOVERY_SEED_HOSTS") "" }}
+
+discovery:
+  seed_hosts: ['{{ $vals := split (getenv "ELASTICSEARCH_DISCOVERY_SEED_HOSTS") "," }}{{ join $vals "', '" }}']
+{{ end }}
+
+action:
+  destructive_requires_name: {{ getenv "ELASTICSEARCH_ACTION_DESTRUCTIVE_REQUIRES_NAME" }}
+
+xpack:
+  security:
+    enabled: {{ getenv "ELASTICSEARCH_XPACK_SECURITY_ENABLED" }}

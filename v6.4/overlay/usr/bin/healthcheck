@@ -1,11 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -eo pipefail
 source /usr/bin/entrypoint
 
-CHECK="$(curl -s -o /dev/null -w "%{http_code}" ${ELASTICSEARCH_HEALTHCHECK_URL})"
+CHECK="$(curl -sL -w %{http_code} -o /dev/null ${ELASTICSEARCH_HEALTHCHECK_URL})"
 
-if [[ "${CHECK}" == "${ELASTICSEARCH_HEALTHCHECK_CODE}" ]]
-then
-  exit 0
+if [[ "${CHECK}" == "${ELASTICSEARCH_HEALTHCHECK_CODE}" ]]; then
+    exit 0
 fi
 
 exit 1

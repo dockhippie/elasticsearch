@@ -1,0 +1,33 @@
+-XX:+UseConcMarkSweepGC
+-XX:CMSInitiatingOccupancyFraction=75
+-XX:+UseCMSInitiatingOccupancyOnly
+
+-XX:+AlwaysPreTouch
+-XX:-OmitStackTraceInFastThrow
+-XX:+HeapDumpOnOutOfMemoryError
+
+-Djava.io.tmpdir=/tmp
+-Djava.awt.headless=true
+-Dfile.encoding=UTF-8
+-Djna.nosys=true
+
+-Dio.netty.noUnsafe=true
+-Dio.netty.noKeySetOptimization=true
+-Dio.netty.recycler.maxCapacityPerThread=0
+
+-Dlog4j.shutdownHookEnabled=false
+-Dlog4j2.disable.jmx=true
+-Dlog4j2.formatMsgNoLookups=true
+-Dlog4j.skipJansi=true
+
+-XX:HeapDumpPath=data
+-XX:ErrorFile={{ getenv "ELASTICSEARCH_LOGS_DIR" }}/hs_err_pid%p.log
+
+-XX:+PrintGCDetails
+-XX:+PrintGCDateStamps
+-XX:+PrintTenuringDistribution
+-XX:+PrintGCApplicationStoppedTime
+-Xloggc:{{ getenv "ELASTICSEARCH_LOGS_DIR" }}/gc.log
+-XX:+UseGCLogFileRotation
+-XX:NumberOfGCLogFiles=32
+-XX:GCLogFileSize=64m

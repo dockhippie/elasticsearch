@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -eo pipefail
+source /usr/bin/entrypoint
+
+for FILE in $(find /etc/container.d -type f -iname \*.sh | sort); do
+    source ${FILE}
+done
+
+pushd ${ELASTICSEARCH_BASE_DIR} >/dev/null
+    echo "> starting elasticsearch service"
+    exec su-exec elastico /usr/share/elasticsearch/bin/elasticsearch
+popd >/dev/null

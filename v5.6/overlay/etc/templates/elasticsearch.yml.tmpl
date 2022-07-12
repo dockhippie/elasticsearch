@@ -1,0 +1,42 @@
+cluster:
+  name: {{ getenv "ELASTICSEARCH_CLUSTER_NAME" }}
+
+node:
+  name: {{ getenv "ELASTICSEARCH_NODE_NAME" }}
+  master: {{ getenv "ELASTICSEARCH_NODE_MASTER" }}
+  data: {{ getenv "ELASTICSEARCH_NODE_DATA" }}
+  ingest: {{ getenv "ELASTICSEARCH_NODE_INGEST" }}
+
+path:
+  data: {{ getenv "ELASTICSEARCH_DATA_DIR" }}
+  logs: {{ getenv "ELASTICSEARCH_LOGS_DIR" }}
+
+network:
+  host: {{ getenv "ELASTICSEARCH_NETWORK_HOST" }}
+{{ if ne (getenv "ELASTICSEARCH_NETWORK_PUBLISH_HOST") "" }}
+  publish_host: {{ getenv "ELASTICSEARCH_NETWORK_PUBLISH_HOST" }}
+{{ end }}
+
+http:
+  enabled: {{ getenv "ELASTICSEARCH_HTTP_ENABLED" }}
+  compression: {{ getenv "ELASTICSEARCH_HTTP_COMPRESSION" }}
+  cors:
+    enabled: {{ getenv "ELASTICSEARCH_HTTP_CORS_ENABLED" }}
+{{ if ne (getenv "ELASTICSEARCH_HTTP_CORS_ALLOW_ORIGIN") "" }}
+    allow-origin: {{ getenv "ELASTICSEARCH_HTTP_CORS_ALLOW_ORIGIN" }}
+{{ end }}
+
+bootstrap:
+  memory_lock: {{ getenv "ELASTICSEARCH_BOOTSTRAP_MEMORY_LOCK" }}
+
+discovery:
+  zen:
+    minimum_master_nodes: {{ getenv "ELASTICSEARCH_DISCOVERY_MINIMUM_MASTERS" }}
+{{ if ne (getenv "ELASTICSEARCH_DISCOVERY_UNICAST_HOSTS") "" }}
+    ping:
+      unicast:
+        hosts: ['{{ $vals := split (getenv "ELASTICSEARCH_DISCOVERY_UNICAST_HOSTS") "," }}{{ join $vals "', '" }}']
+{{ end }}
+
+action:
+  destructive_requires_name: {{ getenv "ELASTICSEARCH_ACTION_DESTRUCTIVE_REQUIRES_NAME" }}
