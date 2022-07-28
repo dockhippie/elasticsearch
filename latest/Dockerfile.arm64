@@ -7,7 +7,7 @@ WORKDIR /var/lib/elasticsearch
 CMD ["/usr/bin/container"]
 
 # renovate: datasource=github-releases depName=elastic/elasticsearch
-ENV ELASTICSEARCH_VERSION=8.3.2
+ENV ELASTICSEARCH_VERSION=8.3.3
 
 RUN apk update && \
   apk upgrade && \
