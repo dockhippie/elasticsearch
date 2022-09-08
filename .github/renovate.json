@@ -8,6 +8,12 @@
     "ignorePaths": [
         "archive/"
     ],
+    "docker": {
+        "digest": {
+            "groupName": "Docker digests",
+            "automerge": true
+        }
+    },
     "packageRules": [
         {
             "description": "Update tags without merge",
