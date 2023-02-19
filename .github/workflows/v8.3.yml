@@ -1,19 +1,19 @@
 ---
-name: latest
+name: v8.3
 
 "on":
   push:
     branches:
       - master
     paths:
-      - latest/*
-      - .github/workflows/docker.yml
+      - v8.3/*
+      - .github/workflows/v8.3.yml
   pull_request:
     branches:
       - master
     paths:
-      - latest/*
-      - .github/workflows/docker.yml
+      - v8.3/*
+      - .github/workflows/v8.3.yml
   workflow_dispatch:
 
 jobs:
@@ -67,28 +67,28 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           builder: ${{ steps.buildx.outputs.name }}
-          context: latest/
-          file: latest/Dockerfile.amd64
+          context: v8.3/
+          file: v8.3/Dockerfile.amd64
           platforms: linux/amd64
           push: ${{ github.event_name != 'pull_request' }}
           labels: ${{ steps.meta.outputs.labels }}
           tags: |
-            webhippie/elasticsearch:latest-amd64
-            quay.io/webhippie/elasticsearch:latest-amd64
+            webhippie/elasticsearch:8.3-amd64
+            quay.io/webhippie/elasticsearch:8.3-amd64
 
       - name: Build arm64
         id: arm64
         uses: docker/build-push-action@v3
         with:
           builder: ${{ steps.buildx.outputs.name }}
-          context: latest/
-          file: latest/Dockerfile.arm64
+          context: v8.3/
+          file: v8.3/Dockerfile.arm64
           platforms: linux/arm64
           push: ${{ github.event_name != 'pull_request' }}
           labels: ${{ steps.meta.outputs.labels }}
           tags: |
-            webhippie/elasticsearch:latest-arm64
-            quay.io/webhippie/elasticsearch:latest-arm64
+            webhippie/elasticsearch:8.3-arm64
+            quay.io/webhippie/elasticsearch:8.3-arm64
 
       - name: Hub manifest
         id: manifest1
@@ -98,8 +98,8 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           platforms: linux/amd64,linux/arm64
-          template: webhippie/elasticsearch:latest-ARCH
-          target: webhippie/elasticsearch:latest
+          template: webhippie/elasticsearch:8.3-ARCH
+          target: webhippie/elasticsearch:8.3
           ignore_missing: true
 
       - name: Quay manifest
@@ -110,8 +110,8 @@ jobs:
           username: ${{ secrets.QUAY_USERNAME }}
           password: ${{ secrets.QUAY_PASSWORD }}
           platforms: linux/amd64,linux/arm64
-          template: quay.io/webhippie/elasticsearch:latest-ARCH
-          target: quay.io/webhippie/elasticsearch:latest
+          template: quay.io/webhippie/elasticsearch:8.3-ARCH
+          target: quay.io/webhippie/elasticsearch:8.3
           ignore_missing: true
 
 ...
