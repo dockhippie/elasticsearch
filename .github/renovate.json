@@ -44,5 +44,8 @@
                 "elastic/elasticsearch"
             ]
         }
+    ],
+    "ignoreDeps": [
+        "docker/build-push-action"
     ]
 }
