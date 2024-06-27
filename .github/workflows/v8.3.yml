@@ -90,7 +90,7 @@ jobs:
 
       - name: Build arm64
         id: arm64
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v3
         with:
           builder: ${{ steps.buildx.outputs.name }}
           context: v8.3/
