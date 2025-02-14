@@ -28,10 +28,15 @@ http:
 
 bootstrap:
   memory_lock: {{ getenv "ELASTICSEARCH_BOOTSTRAP_MEMORY_LOCK" }}
-{{ if ne (getenv "ELASTICSEARCH_DISCOVERY_SEED_HOSTS") "" }}
+{{ if or (ne (getenv "ELASTICSEARCH_DISCOVERY_SEED_HOSTS") "") (ne (getenv "ELASTICSEARCH_DISCOVERY_TYPE") "") }}
 
 discovery:
+{{ if ne (getenv "ELASTICSEARCH_DISCOVERY_TYPE") "" }}
+  type: {{ getenv "ELASTICSEARCH_DISCOVERY_TYPE" }}
+{{ end }}
+{{ if ne (getenv "ELASTICSEARCH_DISCOVERY_SEED_HOSTS") "" }}
   seed_hosts: ['{{ $vals := split (getenv "ELASTICSEARCH_DISCOVERY_SEED_HOSTS") "," }}{{ join $vals "', '" }}']
+{{ end }}
 {{ end }}
 
 action:
