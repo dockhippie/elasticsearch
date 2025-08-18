@@ -1,4 +1,4 @@
-FROM ghcr.io/dockhippie/alpine:latest-arm@sha256:645da10d874149a11c4175fb56517815e857bc7fea08e9dad46de7e285697243
+FROM ghcr.io/dockhippie/alpine:latest-arm@sha256:f3d56f401e989062aac3d013b54194cb294360c0c7804f0b54c56bdc7be86195
 
 EXPOSE 9200 9300
 
