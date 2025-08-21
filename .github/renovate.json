@@ -6,10 +6,10 @@
     "packageRules": [
         {
             "description": "Update tags without merge",
-            "datasources": [
+            "matchDatasources": [
                 "github-releases"
             ],
-            "updateTypes": [
+            "matchUpdateTypes": [
                 "major",
                 "minor"
             ],
@@ -21,10 +21,10 @@
         },
         {
             "description": "Update tags without merge",
-            "datasources": [
+            "matchDatasources": [
                 "github-releases"
             ],
-            "updateTypes": [
+            "matchUpdateTypes": [
                 "patch"
             ],
             "enabled": true,
