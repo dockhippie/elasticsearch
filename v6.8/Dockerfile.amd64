@@ -25,3 +25,7 @@ RUN mkdir -p /usr/share/elasticsearch && \
   chown elastico:elastico /usr/share/elasticsearch
 
 COPY ./overlay /
+
+RUN find /etc/container.d /etc/entrypoint.d -type f -name \*.sh -exec sed -i 's/\r$//' {} +; \
+  sed -i 's/\r$//' /usr/bin/healthcheck /usr/bin/container && \
+  chmod +x /usr/bin/healthcheck /usr/bin/container /etc/container.d/*.sh /etc/entrypoint.d/*.sh
