@@ -1,12 +1,12 @@
 cluster:
   name: {{ getenv "ELASTICSEARCH_CLUSTER_NAME" }}
 {{ if ne (getenv "ELASTICSEARCH_CLUSTER_INITIAL_MASTER_NODES") "" }}
-  initial_master_nodes: ['{{ $vals := split (getenv "ELASTICSEARCH_CLUSTER_INITIAL_MASTER_NODES") "," }}{{ join $vals "', '" }}']
+  initial_master_nodes: ['{{ $vals := strings.Split (getenv "ELASTICSEARCH_CLUSTER_INITIAL_MASTER_NODES") "," }}{{ join $vals "', '" }}']
 {{ end }}
 
 node:
   name: {{ getenv "ELASTICSEARCH_NODE_NAME" }}
-  roles: ['{{ $vals := split (getenv "ELASTICSEARCH_NODE_ROLES") "," }}{{ join $vals "', '" }}']
+  roles: ['{{ $vals := strings.Split (getenv "ELASTICSEARCH_NODE_ROLES") "," }}{{ join $vals "', '" }}']
 
 path:
   data: {{ getenv "ELASTICSEARCH_DATA_DIR" }}
@@ -31,7 +31,7 @@ bootstrap:
 {{ if ne (getenv "ELASTICSEARCH_DISCOVERY_SEED_HOSTS") "" }}
 
 discovery:
-  seed_hosts: ['{{ $vals := split (getenv "ELASTICSEARCH_DISCOVERY_SEED_HOSTS") "," }}{{ join $vals "', '" }}']
+  seed_hosts: ['{{ $vals := strings.Split (getenv "ELASTICSEARCH_DISCOVERY_SEED_HOSTS") "," }}{{ join $vals "', '" }}']
 {{ end }}
 
 action:

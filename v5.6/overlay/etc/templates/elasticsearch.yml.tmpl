@@ -35,7 +35,7 @@ discovery:
 {{ if ne (getenv "ELASTICSEARCH_DISCOVERY_UNICAST_HOSTS") "" }}
     ping:
       unicast:
-        hosts: ['{{ $vals := split (getenv "ELASTICSEARCH_DISCOVERY_UNICAST_HOSTS") "," }}{{ join $vals "', '" }}']
+        hosts: ['{{ $vals := strings.Split (getenv "ELASTICSEARCH_DISCOVERY_UNICAST_HOSTS") "," }}{{ join $vals "', '" }}']
 {{ end }}
 
 action:
