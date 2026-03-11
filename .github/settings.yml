@@ -1,7 +1,7 @@
 ---
 repository:
   name: elasticsearch
-  description: Docker images for elasticsearch
+  description: Docker images for Elasticsearch
   topics: docker, image
 
   private: false
